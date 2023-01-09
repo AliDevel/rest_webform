@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include rest_webform *.css
+recursive-include rest_webform *.csv
+recursive-include rest_webform *.html
+recursive-include rest_webform *.ico
+recursive-include rest_webform *.js
+recursive-include rest_webform *.json
+recursive-include rest_webform *.md
+recursive-include rest_webform *.png
+recursive-include rest_webform *.py
+recursive-include rest_webform *.svg
+recursive-include rest_webform *.txt
+recursive-exclude rest_webform *.pyc
