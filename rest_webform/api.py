@@ -14,7 +14,7 @@ def post_test(**kwargs):
     country = address_dic['country']
     state = address_dic['state_province']
     email= kwargs['e_mail']
-    phone = kwargs['telephone']
+    phone = kwargs['telefon']
     description = kwargs['beschreibung']
     doc.by = str(kwargs)
     doc.insert(ignore_permissions=True)
