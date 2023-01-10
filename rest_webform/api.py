@@ -4,7 +4,7 @@ import frappe,json
 def post_test(**kwargs):
     kwargs=frappe._dict(kwargs) 
    
-    doc = frappe.new_doc('lead')
+    doc = frappe.new_doc('Lead')
   # address_dic= kwargs['adresse']
     title = kwargs['titel']
     name= kwargs['vorname']
