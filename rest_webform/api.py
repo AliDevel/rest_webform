@@ -14,13 +14,15 @@ def post_test(**kwargs):
     #zip = address_dic['postal_code']
     #country = address_dic['country']
     #state = address_dic['state_province']
-   # email= kwargs['e_mail']
-    #phone = kwargs['telefon']
-    #description = kwargs['beschreibung']
+    email= kwargs['e_mail']
+    phone = kwargs['telefon']
+    description = kwargs['beschreibung']
     
     doc.first_name= name
-    #doc.last_name = last_name
-    #doc.company_name = 'None'
+    doc.last_name = last_name
+    doc.email_id = email
+    doc.phone = phone 
+    doc.company_name = 'None'
 
     doc.insert(ignore_permissions=True)
     frappe.db.commit()
