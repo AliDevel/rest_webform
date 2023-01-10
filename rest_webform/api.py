@@ -2,7 +2,7 @@ import frappe,json
 
 @frappe.whitelist(allow_guest=True)
 def post_test(**kwargs):
-    #kwargs=frappe._dict(kwargs) 
+    kwargs=frappe._dict(kwargs) 
    
     doc = frappe.new_doc('Lead')
   # address_dic= kwargs['adresse']
