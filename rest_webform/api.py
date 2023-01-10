@@ -6,9 +6,9 @@ def post_test(**kwargs):
    
     doc = frappe.new_doc('Lead')
   # address_dic= kwargs['adresse']
-#    title = kwargs['titel']
- #   name= kwargs['vorname']
-  #  last_name =  kwargs['nachname']
+    title = kwargs['titel']
+    name= kwargs['vorname']
+    last_name =  kwargs['nachname']
    # address= address_dic['address']
     #city= address_dic['city']
     #zip = address_dic['postal_code']
@@ -18,7 +18,7 @@ def post_test(**kwargs):
     #phone = kwargs['telefon']
     #description = kwargs['beschreibung']
     
-    # doc.first_name= name
+    doc.first_name= name
     #doc.last_name = last_name
     #doc.company_name = 'None'
 
