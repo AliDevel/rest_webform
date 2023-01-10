@@ -4,7 +4,7 @@ import frappe,json
 def post_test(**kwargs):
     kwargs=frappe._dict(kwargs) 
    
-    doc = frappe.new_doc('Lead')
+    doc = frappe.new_doc('hi')
   # address_dic= kwargs['adresse']
     title = kwargs['titel']
     name= kwargs['vorname']
@@ -17,10 +17,10 @@ def post_test(**kwargs):
     email= kwargs['e_mail']
     phone = kwargs['telefon']
     description = kwargs['beschreibung']
-    
-    doc.first_name= name
-    doc.last_name = last_name
-    doc.company_name = 'None'
+    doc.by= title
+    # doc.first_name= name
+    #doc.last_name = last_name
+    #doc.company_name = 'None'
 
     doc.insert(ignore_permissions=True)
     frappe.db.commit()
