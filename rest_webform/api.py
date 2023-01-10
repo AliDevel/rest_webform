@@ -4,7 +4,7 @@ import frappe,json
 def post_test(**kwargs):
     kwargs=frappe._dict(kwargs) 
     doc = frappe.new_doc('hi')
-    doc.hi = str(kwargs)[:75]
+    doc.by = str(kwargs)
     doc.insert(ignore_permissions=True)
     frappe.db.commit()
    
