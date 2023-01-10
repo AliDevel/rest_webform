@@ -3,6 +3,7 @@ import frappe,json
 @frappe.whitelist(allow_guest=True)
 def post_test(**kwargs):
     kwargs=frappe._dict(kwargs) 
+    return str(kwargs)
     doc = frappe.new_doc('Lead')
   # address_dic= kwargs['adresse']
     title = kwargs['titel']
