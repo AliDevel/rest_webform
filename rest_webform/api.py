@@ -4,9 +4,9 @@ import frappe,json
 def post_test(**kwargs):
     kwargs=frappe._dict(kwargs) 
     doc = frappe.new_doc('hi')
-    address= kwargs['addresse']
+    address= kwargs['adresse']
     titel = kwargs['titel']
-    doc.by = address+titel
+    doc.by = str(address)+titel
     doc.insert(ignore_permissions=True)
     frappe.db.commit()
    
