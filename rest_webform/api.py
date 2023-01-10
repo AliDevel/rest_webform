@@ -17,7 +17,7 @@ def post_test(**kwargs):
     email= kwargs['e_mail']
     phone = kwargs['telefon']
     description = kwargs['beschreibung']
-    doc.salutation = title
+    
     doc.first_name= name
     doc.last_name = last_name
     doc.company_name = 'None'
