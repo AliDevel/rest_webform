@@ -24,8 +24,7 @@ def post_test(**kwargs):
     """
    
  
-    doc.city = city
-    doc.country = country
+   
      doc.email_id = email
     doc.phone = phone 
   """   
@@ -39,8 +38,10 @@ def post_test(**kwargs):
         doc.salutation ='Madam'
         doc.gender = 'Female' 
     doc.name = doc.title
-    
-   
+    doc.description = description
+    doc.uri = uri
+    doc.city = city
+    doc.country = country
   
     doc.insert(ignore_permissions=True)
        
