@@ -31,13 +31,13 @@ def post_test(**kwargs):
  
     doc.city = city
     doc.country = country
-    
+     doc.email_id = email
     doc.phone = phone 
   """   
     doc.first_name= name
     doc.last_name = last_name
     doc.title = str(name) + str(last_name)
-    doc.email_id = email
+   
   
     
    
