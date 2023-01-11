@@ -34,7 +34,7 @@ def post_test(**kwargs):
     doc.description = description
     doc.uri = uri
     doc.city = city
-    doc.country = country
+   
     doc.email_id = email
     doc.phone = phone
     
