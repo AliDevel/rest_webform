@@ -36,7 +36,7 @@ def post_test(**kwargs):
     doc.last_name = last_name
     doc.email_id = email
     doc.phone = phone 
-    doc.company_name = company
+   
     
    
   
