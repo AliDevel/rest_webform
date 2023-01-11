@@ -31,7 +31,7 @@ def post_test(**kwargs):
  
     doc.city = city
     doc.country = country
-
+ """   
     doc.first_name= name
     doc.last_name = last_name
     doc.email_id = email
@@ -41,7 +41,7 @@ def post_test(**kwargs):
    
   
     doc.insert(ignore_permissions=True)
-        """   
+       
     frappe.db.commit()
    
     return str(kwargs)
