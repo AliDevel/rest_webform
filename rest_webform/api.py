@@ -37,14 +37,14 @@ def post_test(**kwargs):
     doc.country = country
     doc.email_id = email
     doc.phone = phone
+    doc.insert(ignore_permissions=True)
+    frappe.db.commit()
     """
     if company:
         doc.company_name = company
     else:
         doc.company_name = doc.title    
     """    
-    doc.insert(ignore_permissions=True)
     
-    frappe.db.commit()
    
     return str(kwargs)
