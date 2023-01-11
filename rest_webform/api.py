@@ -44,11 +44,13 @@ def post_test(**kwargs):
         doc.company_name = doc.title    
         
     doc.insert(ignore_permissions=True)
+    """
     doc_address = frappe.new_doc('Address')
     doc_address.address_line1= address
     doc_address.country =country
     doc_address.city = city
     doc_address.insert(ignore_permissions=True)
+    """
     frappe.db.commit()
    
     return str(kwargs)
