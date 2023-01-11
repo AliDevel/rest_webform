@@ -30,9 +30,8 @@ def post_test(**kwargs):
     else:
         doc.salutation ='Madam'
         doc.gender = 'Female' 
-    doc.name = doc.title
     doc.description = description
-    doc.uri = uri
+    #doc.uri = uri
     doc.city = city
     doc.country = country
     doc.email_id = email
