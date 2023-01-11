@@ -3,7 +3,7 @@ import frappe,json
 @frappe.whitelist(allow_guest=True)
 def post_test(**kwargs):
     kwargs=frappe._dict(kwargs) 
-   
+    """
     doc = frappe.new_doc('Lead')
     #doc = frappe.new_doc('hi')
     address_dic= kwargs['adresse']
@@ -37,14 +37,14 @@ def post_test(**kwargs):
     doc.country = country
     doc.email_id = email
     doc.phone = phone
-    """
+
     if company:
         doc.company_name = company
     else:
         doc.company_name = doc.title    
-    """    
+      
     doc.insert(ignore_permissions=True)
-  
+    """  
     frappe.db.commit()
    
     return str(kwargs)
