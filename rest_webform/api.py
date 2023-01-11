@@ -4,8 +4,8 @@ import frappe,json
 def post_test(**kwargs):
     kwargs=frappe._dict(kwargs) 
    
-    #doc = frappe.new_doc('Lead')
-    doc = frappe.new_doc('hi')
+    doc = frappe.new_doc('Lead')
+    #doc = frappe.new_doc('hi')
     address_dic= kwargs['adresse']
     title = kwargs['titel']
     name= kwargs['vorname']
@@ -19,13 +19,29 @@ def post_test(**kwargs):
     phone = kwargs['telefon']
     company = kwargs['firma']
     description = kwargs['beschreibung']
+    uri = kwargs['uri']
+    titles=['Herr','Mr']
+    if title in  titles:
+        doc.salutation ='Mr'
+        doc.gender = 'Male' 
+    else:
+        doc.salutation ='Madam'
+        doc.gender = 'Female'
+    doc.city = city
+    doc.country = country
+
+    doc.first_name= name
+    doc.last_name = last_name
+    doc.email_id = email
+    doc.phone = phone 
+    doc.company_name = company
     
-   # doc.first_name= name
-    #doc.last_name = last_name
-    #doc.email_id = email
-    #doc.phone = phone 
-    #doc.company_name = company
     doc.by = kwargs
+    doc_address=  frappe.new_doc('Address')
+    doc_address.address_line1 = address
+    doc_address.city=city 
+    doc_address.country = country
+    doc_address.insert(ignore_permissions=True)
     doc.insert(ignore_permissions=True)
     frappe.db.commit()
    
