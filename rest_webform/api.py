@@ -28,7 +28,7 @@ def post_test(**kwargs):
     else:
         doc.salutation ='Madam'
         doc.gender = 'Female'
-     """   
+ 
     doc.city = city
     doc.country = country
 
@@ -41,6 +41,7 @@ def post_test(**kwargs):
    
   
     doc.insert(ignore_permissions=True)
+        """   
     frappe.db.commit()
    
     return str(kwargs)
