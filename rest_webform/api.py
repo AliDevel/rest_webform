@@ -24,7 +24,7 @@ def post_test(**kwargs):
     """
     if title in  titles:
         doc.salutation ='Mr'
-        doc.gender = 'Male' 
+        
     else:
         doc.salutation ='Madam'
         doc.gender = 'Female'
@@ -37,7 +37,7 @@ def post_test(**kwargs):
     doc.first_name= name
     doc.last_name = last_name
     doc.title = str(name) + str(last_name)
-   
+    doc.gender = 'Male' 
   
     
    
