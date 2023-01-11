@@ -22,12 +22,7 @@ def post_test(**kwargs):
     uri = kwargs['uri']
     titles=['Herr','Mr']
     """
-    if title in  titles:
-        doc.salutation ='Mr'
-        
-    else:
-        doc.salutation ='Madam'
-        doc.gender = 'Female'
+   
  
     doc.city = city
     doc.country = country
@@ -37,7 +32,12 @@ def post_test(**kwargs):
     doc.first_name= name
     doc.last_name = last_name
     doc.title = str(name) + str(last_name)
-    doc.gender = 'Male' 
+    if title in  titles:
+        doc.salutation ='Mr'
+        doc.gender = 'Male' 
+    else:
+        doc.salutation ='Madam'
+        doc.gender = 'Female' 
   
     
    
