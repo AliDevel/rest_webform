@@ -36,7 +36,7 @@ def post_test(**kwargs):
     doc.phone = phone 
     doc.company_name = company
     
-    doc.by = kwargs
+   
     doc_address=  frappe.new_doc('Address')
     doc_address.address_line1 = address
     doc_address.city=city 
