@@ -26,7 +26,7 @@ def post_test(**kwargs):
  
    
      
-    doc.phone = phone 
+     
   """   
     doc.first_name= name
     doc.last_name = last_name
@@ -40,10 +40,14 @@ def post_test(**kwargs):
     doc.name = doc.title
     doc.description = description
     doc.uri = uri
-    doc.url = '<a>'+uri +'</a>'
     doc.city = city
     doc.country = country
     doc.email_id = email
+    doc.phone = phone
+    if company:
+        doc.company_name = company
+    else:
+        doc.company_name = doc.title    
     doc.insert(ignore_permissions=True)
        
     frappe.db.commit()
