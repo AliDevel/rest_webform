@@ -29,8 +29,13 @@ def post_test(**kwargs):
     #doc.uri = uri
     doc.city = city
     doc.country = country
-    doc.email_id = email
-   
+    
+    if title in  titles:
+        doc.salutation ='Mr'
+        doc.gender = 'Male' 
+    else:
+        doc.salutation ='Madam'
+        doc.gender = 'Female'   
     doc.insert(ignore_permissions=True)
     frappe.db.commit()
     """
