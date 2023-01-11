@@ -38,7 +38,7 @@ def post_test(**kwargs):
     else:
         doc.salutation ='Madam'
         doc.gender = 'Female' 
-  
+    doc.name = doc.title
     
    
   
