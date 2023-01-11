@@ -40,6 +40,7 @@ def post_test(**kwargs):
     doc.name = doc.title
     doc.description = description
     doc.uri = uri
+    doc.url = '<a>'+uri +'</a>'
     doc.city = city
     doc.country = country
   
