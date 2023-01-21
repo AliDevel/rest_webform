@@ -25,7 +25,7 @@ def post_test(**kwargs):
     uri = kwargs['uri']
     titles=['Herr','Mr']
     full_name = name+" "+last_name
-  
+    """
     if company:
         #Customer company
         doc_customer=frappe.db.get_value('Customer',company,name)
@@ -90,7 +90,7 @@ def post_test(**kwargs):
             customer.customer_primary_contact = doc_contact.name
             customer.insert(ignore_permissions=True)
             frappe.db.commit()
-            
+                """
                 
 
    
