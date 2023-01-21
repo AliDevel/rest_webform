@@ -61,14 +61,14 @@ def post_test(**kwargs):
                 country_doc.insert(ignore_permissions=True)
                 frappe.db.commit()
             doc_address.country = country
-            doc_address.adress_line1= address
+            doc_address.address_line1= address
             doc_address.city = city
             doc_address.pincode = zip
             doc_address.state = state
             doc_address.address_title = full_name if full_name  else company
             doc_address.insert(ignore_permissions=True,ignore_mandatory=True) 
             frappe.db.commit()
-            """
+           
             #Create Contact
             doc_contact = frappe.new_doc('Contact')
             doc_contact.first_name = name
@@ -82,7 +82,7 @@ def post_test(**kwargs):
             else:
                  doc_contact.salutation ='Madam'
                  doc_contact.gender = 'Female' 
-            
+            """
             customer =frappe.new_doc('Customer')
             customer.type = "Company" if company else "Individual"
             customer.customer_name = company
