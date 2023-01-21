@@ -98,7 +98,21 @@ def post_test(**kwargs):
             customer.customer_primary_contact = doc_contact.name
             customer.insert(ignore_permissions=True)
             frappe.db.commit()
-             
+            
+            doc_address.append('links',{
+             'link_doctype':'Customer',
+             'link_name': customer.name,
+            'link_title': customer.name})
+            doc_address.save(ignore_permissions=True)
+
+            doc_contact.append('links',{
+             'link_doctype':'Customer',
+             'link_name': customer.name,
+            'link_title': customer.name})
+            doc_contact.save(ignore_permissions=True)
+            frappe.db.commit()
+            
+
                 
 
    
