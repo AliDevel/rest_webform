@@ -33,11 +33,11 @@ def post_test(**kwargs):
         doc_customer=frappe.db.get_value('Customer',full_name)
        
   
-        if doc_customer: #Customer exists
+    if doc_customer: #Customer exists
 
             doc_opportunity = frappe.new_doc('Opportunity')
        
-        else: #New Customer
+    else: #New Customer
               #Create Territory if doesn't exist
             territory = frappe.db.get_value('Territory',country)
             if territory: # territory exists 
