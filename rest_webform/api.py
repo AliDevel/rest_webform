@@ -77,7 +77,9 @@ def post_test(**kwargs):
             doc_contact.append('email_ids',{
              'email_id': email,
             'is_primary': 1})
-            doc_contact.phone = phone
+            doc_contact.append('phone_nos', {
+            'phone': self.nomor_hp,
+            'is_primary_mobile_no': 1})
             doc_contact.address =  doc_address.name
             if title in  titles:
                  doc_contact.salutation ='Mr'
@@ -86,7 +88,7 @@ def post_test(**kwargs):
                  doc_contact.salutation ='Madam'
                  doc_contact.gender = 'Female' 
             doc_contact.insert(ignore_permissions=True,ignore_mandatory=True)      
-            """
+          
             customer =frappe.new_doc('Customer')
             customer.type = "Company" if company else "Individual"
             customer.customer_name = company
@@ -96,7 +98,7 @@ def post_test(**kwargs):
             customer.customer_primary_contact = doc_contact.name
             customer.insert(ignore_permissions=True)
             frappe.db.commit()
-                """
+             
                 
 
    
