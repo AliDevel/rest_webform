@@ -47,7 +47,7 @@ def post_test(**kwargs):
                 territory.territory_name = country
                 territory.insert(ignore_permissions=True)
                 frappe.db.commit()
-            """
+          
 
             #Create Address
             doc_address = frappe.new_doc('Address')
@@ -67,6 +67,7 @@ def post_test(**kwargs):
             doc_address.state = state
             doc_address.insert(ignore_permissions=True)
             frappe.db.commit()
+            """
             #Create Contact
             doc_contact = frappe.new_doc('Contact')
             doc_contact.first_name = name
