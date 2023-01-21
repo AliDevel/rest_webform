@@ -28,9 +28,9 @@ def post_test(**kwargs):
   
     if company:
         #Customer company
-        doc_customer=frappe.db.get_value('Customer',company,name)
+        doc_customer=frappe.db.get_value('Customer',company)
     else:    
-        doc_customer=frappe.db.get_value('Customer',full_name,name)
+        doc_customer=frappe.db.get_value('Customer',full_name)
        
         """
         if doc_customer: #Customer exists
