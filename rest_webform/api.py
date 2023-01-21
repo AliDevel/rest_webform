@@ -82,6 +82,7 @@ def post_test(**kwargs):
             else:
                  doc_contact.salutation ='Madam'
                  doc_contact.gender = 'Female' 
+            doc_contact.insert(ignore_permissions=True,ignore_mandatory=True)      
             """
             customer =frappe.new_doc('Customer')
             customer.type = "Company" if company else "Individual"
