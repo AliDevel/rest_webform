@@ -25,14 +25,14 @@ def post_test(**kwargs):
     uri = kwargs['uri']
     titles=['Herr','Mr']
     full_name = name+" "+last_name
-    """
+  
     if company:
         #Customer company
         doc_customer=frappe.db.get_value('Customer',company,name)
     else:    
         doc_customer=frappe.db.get_value('Customer',full_name,name)
        
-        
+        """
         if doc_customer: #Customer exists
 
             doc_opportunity = frappe.new_doc('Opportunity')
