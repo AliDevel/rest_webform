@@ -78,7 +78,7 @@ def post_test(**kwargs):
              'email_id': email,
             'is_primary': 1})
             doc_contact.append('phone_nos', {
-            'phone': self.nomor_hp,
+            'phone': phone,
             'is_primary_mobile_no': 1})
             doc_contact.address =  doc_address.name
             if title in  titles:
