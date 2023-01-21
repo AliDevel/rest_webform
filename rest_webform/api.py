@@ -32,14 +32,14 @@ def post_test(**kwargs):
     else:    
         doc_customer=frappe.db.get_value('Customer',full_name)
        
-        """
+  
         if doc_customer: #Customer exists
 
             doc_opportunity = frappe.new_doc('Opportunity')
        
         else: #New Customer
               #Create Territory if doesn't exist
-            territory = frappe.db.get_value('Territory',country,'name')
+            territory = frappe.db.get_value('Territory',country)
             if territory: # territory exists 
                 territory = frappe.get_doc('Territory',country)
             else: #Create territory
@@ -47,7 +47,7 @@ def post_test(**kwargs):
                 territory.territory_name = country
                 territory.insert(ignore_permissions=True)
                 frappe.db.commit()
-            
+            """
 
             #Create Address
             doc_address = frappe.new_doc('Address')
