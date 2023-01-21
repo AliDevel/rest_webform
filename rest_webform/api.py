@@ -65,6 +65,7 @@ def post_test(**kwargs):
             doc_address.city = city
             doc_address.pincode = zip
             doc_address.state = state
+            doc_address.title = full_name if full_name  else company
             doc_address.insert(ignore_permissions=True)
             frappe.db.commit()
             """
