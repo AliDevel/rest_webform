@@ -74,7 +74,9 @@ def post_test(**kwargs):
             doc_contact.first_name = name
             doc_contact.last_name  = last_name 
             doc_contact.email_ids[0].email_id =email
-            
+            doc_contact.append('email_ids',{
+             'email_id': email,
+            'is_primary': 1})
             doc_contact.phone = phone
             doc_contact.address =  doc_address.name
             if title in  titles:
