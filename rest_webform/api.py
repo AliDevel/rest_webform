@@ -62,7 +62,7 @@ def create_customer(lead):
                  doc_address = create_address(country,address,city,zip,state,full_name,company)
                  doc_contact = create_contact(name,last_name, phone, doc_address,title,titles,email)
                  contact_name = get_contact(name,last_name,email)
-           doc_list.append(doc_customer.name)
+           doc_list.append(doc_customer)
            doc_list.append(contact_name)
            return doc_customer
        
