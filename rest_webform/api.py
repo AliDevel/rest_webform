@@ -10,13 +10,14 @@ def post_test(**kwargs):
     doc_lead.description = kwargs
     doc_lead.insert(ignore_permissions=True)
     frappe.db.commit()
-    """"
+    
     description = kwargs['beschreibung']
     url = kwargs['uri']
     owner= kwargs['owner']
+    webform = kwargs['webform']
     create_customer(kwargs)
-    create_opportunity(description,uri,owner)
-    """
+    create_opportunity(description,url,owner)
+    
   
                 
 
