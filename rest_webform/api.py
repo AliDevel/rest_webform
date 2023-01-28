@@ -47,7 +47,7 @@ def create_customer(lead):
      email= kwargs['e_mail']
      phone = kwargs['telefon']
      company = kwargs['firma']
-  
+     doc_list=[]
      titles=['Herr','Mr']
      full_name = name+" "+last_name
      if company:
@@ -104,7 +104,7 @@ def create_customer(lead):
             'link_title': doc_customer.name})
             doc_contact.save(ignore_permissions=True)
             frappe.db.commit()
-            doc_list=[]
+           
             doc_list.append(doc_customer.name)
             doc_list.append(doc_contact.name)
             return doc_list
