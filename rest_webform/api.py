@@ -19,7 +19,9 @@ def post_test(**kwargs):
    
     return str(kwargs)
 @frappe.whitelist(allow_guest=True)
-def create_opportunity(doc_customer, doc_contact,description, url,owner):
+def create_opportunity(customer_name, contact_name,description, url,owner):
+    doc_customer =frappe.get_doc('Customer',customer_name)
+    doc_contact = frappe.get_doc('Contact', contact_name)
     doc_opportunity = frappe.new_doc('Opportunity')
     doc_opportunity.opportunity_from = "Customer"
     doc_opportunity.party_name = doc_customer.name
@@ -97,8 +99,8 @@ def create_customer(lead):
             doc_contact.save(ignore_permissions=True)
             frappe.db.commit()
             doc_list=[]
-            doc_list.append(doc_customer)
-            doc_list.append(doc_contact)
+            doc_list.append(doc_customer.name)
+            doc_list.append(doc_contact.name)
             return doc_list
 
 
