@@ -57,7 +57,13 @@ def create_customer(lead):
         doc_customer=frappe.db.get_value('Customer',full_name)
      
      if doc_customer: #Customer exists
-
+           contact_name = get_contact(name,last_name,email)
+           if not contact_name:
+                 doc_address = create_address(country,address,city,zip,state,full_name,company)
+                 doc_contact = create_contact(name,last_name, phone, doc_address,title,titles,email)
+                 contact_name = get_contact(name,last_name,email)
+           doc_list.append(doc_customer.name)
+           doc_list.append(contact_name)
            return doc_customer
        
      else: #New Customer
@@ -103,8 +109,9 @@ def create_customer(lead):
             doc_list.append(doc_contact.name)
             return doc_list
 
-
-
+def get_contact(first_name,last_name, email):
+    contact_name = frappe.db.get_value('Contact',{'first_name':first_name, 'last_name': last_name,'email_id':email},['name'])
+    return contact_name
 def create_address(country,address,city,zip,state,full_name,company):
       #Create Address
             doc_address = frappe.new_doc('Address')
