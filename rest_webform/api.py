@@ -52,21 +52,22 @@ def create_customer(lead):
      full_name = name+" "+last_name
      if company:
         #Customer company
-        doc_customer=frappe.db.get_value('Customer',company,['name'])
+        customer_name=frappe.db.get_value('Customer',company,['name'])
      else:    
-        doc_customer=frappe.db.get_value('Customer',full_name,['name'])
+        customer_name=frappe.db.get_value('Customer',full_name,['name'])
      
-     if doc_customer: #Customer exists
-          """
-           contact_name = get_contact(name,last_name,email)
-           if not contact_name:
+     if customer_name: #Customer exists
+        doc_customer =frappe.get_doc('Customer',customer_name)
+          
+        contact_name = get_contact(name,last_name,email)
+        if not contact_name:
                  doc_address = create_address(country,address,city,zip,state,full_name,company)
                  doc_contact = create_contact(name,last_name, phone, doc_address,title,titles,email)
                  contact_name = get_contact(name,last_name,email)
-           doc_list.append(doc_customer)
-           doc_list.append(contact_name)
-           """
-          return doc_customer
+        doc_list.append(doc_customer.name)
+        doc_list.append(contact_name)
+           
+        return doc_list
        
      else: #New Customer
               #Create Territory if doesn't exist
