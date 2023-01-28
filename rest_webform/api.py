@@ -1,43 +1,68 @@
 import frappe,json
 
+doc_customer =''
+doc_contact = ''
+doc_address = '' 
 @frappe.whitelist(allow_guest=True)
 def post_test(**kwargs):
     kwargs=frappe._dict(kwargs) 
-    
-    
-    #doc = frappe.new_doc('hi')
-    
-    title = kwargs['titel']
-    name= kwargs['vorname']
+    doc_lead = frappe.new_doc("Lead")
+    doc_lead.description = kwargs
+    doc_lead.insert(ignore_permissions=True)
+    frappe.db.commit()
+    """"
+    description = kwargs['beschreibung']
+    url = kwargs['uri']
+    owner= kwargs['owner']
+    create_customer(kwargs)
+    create_opportunity(description,uri,owner)
+    """
+  
+                
 
-    last_name =  kwargs['nachname']
-    address_dic= kwargs['adresse'] if kwargs['adresse'] else ''
-    if address_dic:
+   
+    return str(kwargs)
+@frappe.whitelist(allow_guest=True)
+def create_opportunity(description, url,owner):
+    doc_opportunity = frappe.new_doc('Opportunity')
+    doc_opportunity.opportunity_from = "Customer"
+    doc_opportunity.party_name = doc_customer.name
+    doc_opportunity.contact_person = doc_contact.name
+    doc_opportunity.opportunity_owner = owner
+    doc_opportunity.description = description 
+    doc_opportunity.url = url
+    doc_opportunity.insert(ignore_permissions=True)
+    frappe.db.commit()
+
+def create_customer(lead):
+     kwargs=frappe._dict(lead) 
+     title = kwargs['titel']
+     name= kwargs['vorname']
+     last_name =  kwargs['nachname']
+     address_dic= kwargs['adresse'] if kwargs['adresse'] else ''
+     if address_dic:
         address= address_dic['address']
         city= address_dic['city']
         zip = address_dic['postal_code']
         country = address_dic['country']
         state = address_dic['state_province']
-    email= kwargs['e_mail']
-    phone = kwargs['telefon']
-    company = kwargs['firma']
-    description = kwargs['beschreibung']
-    uri = kwargs['uri']
-    titles=['Herr','Mr']
-    full_name = name+" "+last_name
+     email= kwargs['e_mail']
+     phone = kwargs['telefon']
+     company = kwargs['firma']
   
-    if company:
+     titles=['Herr','Mr']
+     full_name = name+" "+last_name
+     if company:
         #Customer company
         doc_customer=frappe.db.get_value('Customer',company)
-    else:    
+     else:    
         doc_customer=frappe.db.get_value('Customer',full_name)
-       
-  
-    if doc_customer: #Customer exists
+     
+     if doc_customer: #Customer exists
 
-            doc_opportunity = frappe.new_doc('Opportunity')
+           return doc_customer
        
-    else: #New Customer
+     else: #New Customer
               #Create Territory if doesn't exist
             territory = frappe.db.get_value('Territory',country)
             if territory: # territory exists 
@@ -49,7 +74,38 @@ def post_test(**kwargs):
                 frappe.db.commit()
           
 
-            #Create Address
+            doc_address = create_address(country,address,city,state)
+            doc_contact = create_contact(name,last_name, phone, doc_address,title,titles,email)
+        
+          
+            doc_customer =frappe.new_doc('Customer')
+            doc_customer.type = "Company" if company else "Individual"
+            doc_customer.customer_name = company
+            doc_customer.customer_group ="Commercial" 
+            doc_customer.territory = country
+            doc_customer.customer_primary_address = doc_address.name
+            doc_customer.customer_primary_contact = doc_contact.name
+            doc_customer.insert(ignore_permissions=True)
+            frappe.db.commit()
+            
+            doc_address.append('links',{
+             'link_doctype':'Customer',
+             'link_name': doc_customer.name,
+            'link_title': doc_customer.name})
+            doc_address.save(ignore_permissions=True)
+
+            doc_contact.append('links',{
+             'link_doctype':'Customer',
+             'link_name': doc_customer.name,
+            'link_title': doc_customer.name})
+            doc_contact.save(ignore_permissions=True)
+            frappe.db.commit()
+            return doc_customer
+
+
+
+def create_address(country,address,city,state,full_name,company):
+      #Create Address
             doc_address = frappe.new_doc('Address')
             doc_address.address_type = "Permanent"
             country_doc = frappe.db.get_value('Country',country,'name')
@@ -68,8 +124,10 @@ def post_test(**kwargs):
             doc_address.address_title = full_name if full_name  else company
             doc_address.insert(ignore_permissions=True,ignore_mandatory=True) 
             frappe.db.commit()
-           
-            #Create Contact
+            return doc_address
+
+def create_contact(name,last_name,phone,doc_address,title,titles,email):
+          #Create Contact
             doc_contact = frappe.new_doc('Contact')
             doc_contact.first_name = name
             doc_contact.last_name  = last_name 
@@ -87,38 +145,6 @@ def post_test(**kwargs):
             else:
                  doc_contact.salutation ='Madam'
                  doc_contact.gender = 'Female' 
-            doc_contact.insert(ignore_permissions=True,ignore_mandatory=True)      
-          
-            customer =frappe.new_doc('Customer')
-            customer.type = "Company" if company else "Individual"
-            customer.customer_name = company
-            customer.customer_group ="Commercial" 
-            customer.territory = country
-            customer.customer_primary_address = doc_address.name
-            customer.customer_primary_contact = doc_contact.name
-            customer.insert(ignore_permissions=True)
+            doc_contact.insert(ignore_permissions=True,ignore_mandatory=True)
             frappe.db.commit()
-            
-            doc_address.append('links',{
-             'link_doctype':'Customer',
-             'link_name': customer.name,
-            'link_title': customer.name})
-            doc_address.save(ignore_permissions=True)
-
-            doc_contact.append('links',{
-             'link_doctype':'Customer',
-             'link_name': customer.name,
-            'link_title': customer.name})
-            doc_contact.save(ignore_permissions=True)
-            frappe.db.commit()
-            
-
-                
-
-   
-    return str(kwargs)
-
-def create_customer():
-    pass 
-def create_address():
-    pass
+            return doc_contact 
