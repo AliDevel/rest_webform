@@ -12,7 +12,7 @@ def post_test(**kwargs):
     owner= kwargs['owner']
     webform = kwargs['webform']
     doc_customer, doc_contact = create_customer(kwargs)
-    create_opportunity(doc_customer, doc_contact,description,url,owner)
+    #create_opportunity(doc_customer, doc_contact,description,url,owner)
       
                 
 
