@@ -52,9 +52,9 @@ def create_customer(lead):
      full_name = name+" "+last_name
      if company:
         #Customer company
-        doc_customer=frappe.db.get_value('Customer',company)
+        doc_customer=frappe.db.get_value('Customer',company,['name'])
      else:    
-        doc_customer=frappe.db.get_value('Customer',full_name)
+        doc_customer=frappe.db.get_value('Customer',full_name,['name'])
      
      if doc_customer: #Customer exists
            contact_name = get_contact(name,last_name,email)
