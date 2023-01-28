@@ -70,7 +70,7 @@ def create_customer(lead):
                 frappe.db.commit()
           
 
-            doc_address = create_address(country,address,city,state)
+            doc_address = create_address(country,address,city,zip,state,full_name,company)
             doc_contact = create_contact(name,last_name, phone, doc_address,title,titles,email)
         
           
@@ -100,7 +100,7 @@ def create_customer(lead):
 
 
 
-def create_address(country,address,city,state,full_name,company):
+def create_address(country,address,city,zip,state,full_name,company):
       #Create Address
             doc_address = frappe.new_doc('Address')
             doc_address.address_type = "Permanent"
