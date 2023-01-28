@@ -151,7 +151,7 @@ def create_contact(name,last_name,phone,doc_address,title,titles,email):
             'is_primary_mobile_no': 1})
             doc_contact.address =  doc_address.name
             if title in  titles:
-                 doc_contact.salutation ='Mr'
+                 doc_contact.salutation ='Mister'
                  doc_contact.gender = 'Male' 
             else:
                  doc_contact.salutation ='Madam'
