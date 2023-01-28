@@ -11,7 +11,7 @@ def post_test(**kwargs):
     url = kwargs['uri']
     owner= kwargs['owner']
     webform = kwargs['webform']
-    doc_customer, doc_contact = create_customer(kwargs)
+    doc_customer = create_customer(kwargs)
     #create_opportunity(doc_customer, doc_contact,description,url,owner)
       
                 
@@ -96,7 +96,7 @@ def create_customer(lead):
             'link_title': doc_customer.name})
             doc_contact.save(ignore_permissions=True)
             frappe.db.commit()
-            return doc_customer,doc_contact
+            return doc_customer
 
 
 
