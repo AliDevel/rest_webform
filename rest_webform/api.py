@@ -1,30 +1,25 @@
 import frappe,json
 
-doc_customer =''
-doc_contact = ''
-doc_address = '' 
+
+
 @frappe.whitelist(allow_guest=True)
-def post_test(**kwargs):
+def post_test(kwargs):
     kwargs=frappe._dict(kwargs) 
-    doc_lead = frappe.new_doc("Lead")
-    doc_lead.description = kwargs
-    doc_lead.insert(ignore_permissions=True)
-    frappe.db.commit()
+    
     
     description = kwargs['beschreibung']
     url = kwargs['uri']
     owner= kwargs['owner']
     webform = kwargs['webform']
-    create_customer(kwargs)
-    create_opportunity(description,url,owner)
-    
-  
+    doc_customer, doc_contact = create_customer(kwargs)
+    create_opportunity(doc_customer, doc_contact,description,url,owner)
+      
                 
 
    
     return str(kwargs)
 @frappe.whitelist(allow_guest=True)
-def create_opportunity(description, url,owner):
+def create_opportunity(doc_customer, doc_contact,description, url,owner):
     doc_opportunity = frappe.new_doc('Opportunity')
     doc_opportunity.opportunity_from = "Customer"
     doc_opportunity.party_name = doc_customer.name
@@ -101,7 +96,7 @@ def create_customer(lead):
             'link_title': doc_customer.name})
             doc_contact.save(ignore_permissions=True)
             frappe.db.commit()
-            return doc_customer
+            return doc_customer,doc_contact
 
 
 
