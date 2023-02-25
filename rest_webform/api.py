@@ -48,6 +48,10 @@ def create_customer(lead):
         name= kwargs['vorname']
      last_name =  kwargs['nachname'] if 'nachname' in kwargs  else ''
      address_dic= kwargs['adresse'] if 'adresse' in kwargs else ''
+     address=''
+     city = ''
+     zip = ''
+     state = ''
      if address_dic:
         address= address_dic['address']
         city= address_dic['city']
@@ -71,7 +75,10 @@ def create_customer(lead):
           
         contact_name = get_contact(name,last_name,email)
         if not contact_name:
-                 doc_address = create_address(country,address,city,zip,state,full_name,company)
+                 if address:
+                    doc_address = create_address(country,address,city,zip,state,full_name,company)
+                 else:
+                    doc_address = ''   
                  doc_contact = create_contact(name,last_name, phone, doc_address,title,titles,email)
                  contact_name = get_contact(name,last_name,email)
         doc_list.append(doc_customer.name)
@@ -162,7 +169,8 @@ def create_contact(name,last_name,phone,doc_address,title,titles,email):
             doc_contact.append('phone_nos', {
             'phone': phone,
             'is_primary_mobile_no': 1})
-            doc_contact.address =  doc_address.name
+            if doc_address:
+                doc_contact.address =  doc_address.name
             if title in  titles:
                  doc_contact.salutation ='Mister'
                  doc_contact.gender = 'Male' 
