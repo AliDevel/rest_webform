@@ -6,10 +6,16 @@ import frappe,json
 def post_test(**kwargs):
     kwargs=frappe._dict(kwargs) 
     
-    
-    description = kwargs['beschreibung']
+    if 'beschreibung' in kwargs:
+        description = kwargs['beschreibung']
+    else:
+        description = ''
+        
     url = kwargs['uri']
-    owner= kwargs['owner']
+    if 'owner' in kwargs:
+        owner= kwargs['owner']
+    else: 
+        owner = ''
     webform = kwargs['webform']
     doc_list = create_customer(kwargs)
     create_opportunity(doc_list[0], doc_list[1],description,url,owner)
@@ -34,19 +40,23 @@ def create_opportunity(customer_name, contact_name,description, url,owner):
 
 def create_customer(lead):
      kwargs=frappe._dict(lead) 
-     title = kwargs['titel']
-     name= kwargs['vorname']
-     last_name =  kwargs['nachname']
-     address_dic= kwargs['adresse'] if kwargs['adresse'] else ''
+     title = ''
+     name = ''
+     if 'titel' in kwargs:
+        title = kwargs['titel']
+     if 'vorname' in kwargs:
+        name= kwargs['vorname']
+     last_name =  kwargs['nachname'] if 'nachname' in kwargs  else ''
+     address_dic= kwargs['adresse'] if 'adresse' in kwargs else ''
      if address_dic:
         address= address_dic['address']
         city= address_dic['city']
         zip = address_dic['postal_code']
         country = address_dic['country']
         state = address_dic['state_province']
-     email= kwargs['e_mail']
-     phone = kwargs['telefon']
-     company = kwargs['firma']
+     email= kwargs['e_mail'] if 'e_mail' in kwargs else ''
+     phone = kwargs['telefon'] if 'telefon' in kwargs else ''
+     company = kwargs['firma'] if 'firma' in kwargs else ''
      doc_list=[]
      titles=['Herr','Mr']
      full_name = name+" "+last_name
@@ -124,7 +134,10 @@ def create_address(country,address,city,zip,state,full_name,company):
                 country_doc = frappe.get_doc('Country',country)
             else: #Create Country
                 country_doc =frappe.new_doc('Country')
-                country_doc.country_name = country
+                if country:
+                    country_doc.country_name = country
+                else:
+                    country_doc.country_name  = 'Germany'    
                 country_doc.insert(ignore_permissions=True)
                 frappe.db.commit()
             doc_address.country = country
