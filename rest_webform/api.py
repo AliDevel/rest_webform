@@ -33,7 +33,7 @@ def create_opportunity(kwargs,customer_name, contact_name,description, url,owner
     doc_opportunity.party_name = doc_customer.name
     doc_opportunity.contact_person = doc_contact.name
     doc_opportunity.opportunity_owner = owner
-    for key,value in kwargs:
+    for key,value in kwargs.items():
      doc_opportunity.description = doc_opportunity.description + key+ ':' + value + '\n'
     doc_opportunity.url = url
     doc_opportunity.insert(ignore_permissions=True)
