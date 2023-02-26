@@ -18,14 +18,14 @@ def post_test(**kwargs):
         owner = ''
     webform = kwargs['webform']
     doc_list = create_customer(kwargs)
-    create_opportunity(doc_list[0], doc_list[1],description,url,owner)
+    create_opportunity(kwargs, doc_list[0], doc_list[1],description,url,owner)
       
                 
 
    
     return str(kwargs)
 @frappe.whitelist(allow_guest=True)
-def create_opportunity(customer_name, contact_name,description, url,owner):
+def create_opportunity(kwargs,customer_name, contact_name,description, url,owner):
     doc_customer =frappe.get_doc('Customer',customer_name)
     doc_contact = frappe.get_doc('Contact', contact_name)
     doc_opportunity = frappe.new_doc('Opportunity')
@@ -33,7 +33,8 @@ def create_opportunity(customer_name, contact_name,description, url,owner):
     doc_opportunity.party_name = doc_customer.name
     doc_opportunity.contact_person = doc_contact.name
     doc_opportunity.opportunity_owner = owner
-    doc_opportunity.description = description 
+    for key,value in kwargs:
+     doc_opportunity.description = doc_opportunity.description + key+ ':' + value + '\n'
     doc_opportunity.url = url
     doc_opportunity.insert(ignore_permissions=True)
     frappe.db.commit()
