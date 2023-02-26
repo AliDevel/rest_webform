@@ -26,6 +26,7 @@ def post_test(**kwargs):
     return str(kwargs)
 @frappe.whitelist(allow_guest=True)
 def create_opportunity(kwargs,customer_name, contact_name,description, url,owner):
+    description = ''
     doc_customer =frappe.get_doc('Customer',customer_name)
     doc_contact = frappe.get_doc('Contact', contact_name)
     doc_opportunity = frappe.new_doc('Opportunity')
