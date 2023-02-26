@@ -143,6 +143,8 @@ def create_address(country,address,city,zip,state,full_name,company):
       #Create Address
             doc_address = frappe.new_doc('Address')
             doc_address.address_type = "Permanent"
+            if not country:
+                     country = 'Germany'  
             country_doc = frappe.db.get_value('Country',country,'name')
             if country_doc: # Country exists 
                 country_doc = frappe.get_doc('Country',country)
