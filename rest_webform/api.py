@@ -95,6 +95,8 @@ def create_customer(lead):
             if territory: # territory exists 
                 territory = frappe.get_doc('Territory',country)
             else: #Create territory
+                if not country:
+                     country = 'Germany'
                 territory =frappe.new_doc('Territory')
                 territory.territory_name = country
                 territory.insert(ignore_permissions=True)
