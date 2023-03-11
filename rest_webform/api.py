@@ -111,7 +111,7 @@ def create_customer(lead):
           
             doc_customer =frappe.new_doc('Customer')
             doc_customer.type = "Company" if company else "Individual"
-            doc_customer.customer_name = company
+            doc_customer.customer_name = company if company else full_name 
             doc_customer.customer_group ="Commercial" 
             doc_customer.territory = country
             doc_customer.customer_primary_address = doc_address.name
